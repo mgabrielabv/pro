@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quien sabe?</title>
+      <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>¿Quien sabe?</h1>
+    <h5>Quiz game</h5>
+  <h2>¿Quieres jugar?</h2>
+  <button id="start-button">Comenzar</button>
+
+  <div id="config-section" class="hidden">
+    <h2>Configuración del juego</h2>
+    <form id="start-form">
+      <label>Nombre: <input type="text" id="player-name" required minlength="2" maxlength="20"></label><br>
+      <label>Cantidad (5–20): <input type="number" id="question-count" min="5" max="20" required></label><br>
+      <label>Dificultad:
+        <select id="difficulty">
+          <option value="easy">Fácil</option>
+          <option value="medium">Media</option>
+          <option value="hard">Difícil</option>
+        </select>
+      </label><br>
+      <label>Categoría:
+        <select id="category">
+          <option value="">Mixtas</option>
+        </select>
+      </label><br>
+      <button type="submit">Empezar juego</button>
+    </form>
+    <div id="loader" class="hidden">Cargando preguntas…</div>
+  </div>
+
+  <div id="questions"></div>
+ <script src="script.js"></script>
+</body>
+</html>
