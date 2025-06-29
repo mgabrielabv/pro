@@ -6,10 +6,10 @@
       <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>¿Quien sabe?</h1>
-    <h5>Quiz game</h5>
-  <h2>¿Quieres jugar?</h2>
-  <button id="start-button">Comenzar</button>
+  <div id="intro-section">
+    <h2 id="play-text" class="intro-title">Do you want to play?</h2>
+    <button id="start-button" class="intro-btn">Iniciar Juego</button>
+  </div>
 
   <div id="config-section" class="hidden">
     <h2>Configuración del juego</h2>
@@ -34,6 +34,11 @@
   </div>
 
   <div id="questions"></div>
- <script src="script.js"></script>
+  <div id="scoreboard" class="hidden" style="margin: 20px 0; font-weight: bold;">
+    Puntuación: <span id="score">0</span> |
+    Correctas: <span id="correct">0</span> |
+    Incorrectas: <span id="incorrect">0</span>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

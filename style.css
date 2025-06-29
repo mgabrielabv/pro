@@ -1,3 +1,226 @@
-    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-    .hidden { display: none; }
-    #loader { margin-top: 20px; }
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --fondo: #4a003d;
+  --violeta: #9400d3;
+  --magenta: #ff2fb3;
+  --dorado: #ffd700;
+  --claro: #fff;
+  --transparente: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 0, 61, 0.7);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#intro-section,
+#config-section,
+#questions,
+#scoreboard {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  color: var(--dorado);
+  text-shadow: 0 0 10px var(--magenta), 0 0 25px var(--violeta);
+  margin-bottom: 0.2em;
+}
+
+h5 {
+  font-weight: 400;
+  color: #f8dff0;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--magenta);
+  margin: 1em 0;
+}
+
+button {
+  background: transparent;
+  border: 2px solid var(--magenta);
+  color: var(--dorado);
+  padding: 0.7em 2em;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0.6em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px var(--magenta), 0 0 5px var(--violeta);
+}
+
+button:hover {
+  background: var(--magenta);
+  color: #fff;
+  box-shadow: 0 0 20px var(--magenta), 0 0 10px var(--violeta);
+  transform: scale(1.05);
+}
+
+#config-section {
+  background: var(--transparente);
+  border: 1px solid var(--violeta);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 15px rgba(255, 47, 179, 0.4);
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+label {
+  display: block;
+  margin-top: 1.2em;
+  font-weight: 600;
+  color: var(--dorado);
+  text-align: left;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6em;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  color: #4a003d;
+  font-size: 1em;
+  margin-top: 0.3em;
+}
+
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--magenta);
+}
+
+#loader {
+  color: var(--dorado);
+  font-weight: bold;
+  margin-top: 1em;
+  animation: blink 1s infinite alternate;
+}
+
+#questions {
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--magenta);
+  box-shadow: 0 0 15px var(--violeta);
+  background: rgba(255, 255, 255, 0.03);
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+#questions strong {
+  font-size: 1.3em;
+  color: var(--dorado);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+#questions button {
+  display: block;
+  margin: 0.5em auto;
+  width: 90%;
+  max-width: 400px;
+  padding: 0.7em;
+  border-radius: 10px;
+  background: transparent;
+  border: 2px solid var(--violeta);
+  color: var(--claro);
+  transition: all 0.3s ease-in-out;
+}
+
+#questions button:hover {
+  background: var(--violeta);
+  color: #fff;
+  font-weight: bold;
+}
+
+#scoreboard {
+  margin: 20px 0;
+  font-weight: bold;
+  color: var(--dorado);
+  font-size: 1.1em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes blink {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+#intro-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+  min-height: 100vh;
+  justify-content: center;
+  width: 100vw;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: url('who-knows.png') no-repeat center center;
+  background-size: cover;
+}
+
+#intro-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 0, 61, 0.7);
+  z-index: 1;
+}
+
+#intro-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+.intro-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  color: var(--dorado);
+  text-shadow: 0 0 10px var(--magenta), 0 0 25px var(--violeta);
+  margin-bottom: 2em;
+  margin-top: 0;
+  letter-spacing: 2px;
+}
+
+.intro-btn {
+  margin-top: 2em;
+}
+
+#intro-section {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
