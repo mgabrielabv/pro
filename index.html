@@ -1,39 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>¿Quien sabe?</title>
-      <link rel="stylesheet" href="style.css">
+  <title>Who Knows?</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>¿Quien sabe?</h1>
-    <h5>Quiz game</h5>
-  <h2>¿Quieres jugar?</h2>
-  <button id="start-button">Comenzar</button>
-
-  <div id="config-section" class="hidden">
-    <h2>Configuración del juego</h2>
-    <form id="start-form">
-      <label>Nombre: <input type="text" id="player-name" required minlength="2" maxlength="20"></label><br>
-      <label>Cantidad (5–20): <input type="number" id="question-count" min="5" max="20" required></label><br>
-      <label>Dificultad:
-        <select id="difficulty">
-          <option value="easy">Fácil</option>
-          <option value="medium">Media</option>
-          <option value="hard">Difícil</option>
-        </select>
-      </label><br>
-      <label>Categoría:
-        <select id="category">
-          <option value="">Mixtas</option>
-        </select>
-      </label><br>
-      <button type="submit">Empezar juego</button>
-    </form>
-    <div id="loader" class="hidden">Cargando preguntas…</div>
+  <div id="intro-section">
+    <button id="start-button" class="intro-btn">Start Game</button>
   </div>
 
+  <div id="config-section" class="hidden">
+    <h2>Game Settings</h2>
+    <form id="start-form">
+      <label>Name: <input type="text" id="player-name" required minlength="2" maxlength="20"></label><br>
+      <label>Amount (5–20): <input type="number" id="question-count" min="5" max="20" required></label><br>
+      <label>Difficulty:
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </label><br>
+      <label>Category:
+        <select id="category">
+          <option value="">Mixed</option>
+        </select>
+      </label><br>
+      <button type="submit">Start Game</button>
+    </form>
+  </div>
+
+  <div id="loader" class="hidden">Loading questions…</div>
+
   <div id="questions"></div>
- <script src="script.js"></script>
+  <div id="scoreboard" class="hidden scoreboard">
+    <div class="score-item">
+      <span class="score-label">Score</span>
+      <span id="score" class="score-value">0</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">Correct</span>
+      <span id="correct" class="score-value">0</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">Incorrect</span>
+      <span id="incorrect" class="score-value">0</span>
+    </div>
+  </div>
+  <div class="bratz-sparkle one"></div>
+  <div class="bratz-sparkle two"></div>
+  <script src="script.js"></script>
 </body>
 </html>
