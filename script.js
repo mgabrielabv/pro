@@ -98,7 +98,9 @@ function showQuestions(questions) {
     questionStartTime = Date.now();
     const q = questions[idx];
     const answers = [...q.incorrect_answers, q.correct_answer].sort(() => Math.random() - 0.5);
+    // Crear el div principal con la clase question-card
     const qDiv = document.createElement('div');
+    qDiv.className = 'question-card';
     qDiv.innerHTML = `
       <div>
         Pregunta ${idx + 1} de ${questions.length}
@@ -186,7 +188,7 @@ function showFinalResults(questions, correct, incorrect, score, questionTimes) {
   const avgTime = (questionTimes.reduce((a, b) => a + b, 0) / questionTimes.length).toFixed(2);
 
   questionsDiv.innerHTML = `
-    <div style="font-size:1.3em;margin-top:20px;">
+    <div class="final-results-card">
       <b>Game Over!</b><br>
       <b>Player:</b> ${playerName}<br>
       <b>Score:</b> ${score}<br>
@@ -210,7 +212,7 @@ function showFinalResults(questions, correct, incorrect, score, questionTimes) {
     scoreboard.classList.add('hidden');
   };
   document.getElementById('exit-btn').onclick = () => {
-    questionsDiv.innerHTML = '<div style="font-size:1.5em; color: var(--dorado); margin-top:2em;">Thanks for playing!</div>';
+    questionsDiv.innerHTML = '<div class="thanks-message">Thanks for playing!</div>';
     scoreboard.classList.add('hidden');
   };
 }

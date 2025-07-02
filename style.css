@@ -14,7 +14,8 @@
 
 body {
   min-height: 100vh;
-  background: var(--fondo);
+  background: url('fondo-bratz.png') no-repeat center center fixed, var(--fondo);
+  background-size: cover;
   font-family: 'Open Sans', Arial, sans-serif;
   color: var(--gris);
   margin: 0;
@@ -76,14 +77,14 @@ body {
   align-items: center;
   justify-content: center;
   margin: 2rem auto;
-  max-width: 420px;
+  max-width: 340px;
   width: 100%;
-  min-height: 60vh;
+  min-height: 50vh;
   background: radial-gradient(circle at 60% 40%, #fff0fa 0%, #ff69b4 100%);
   border: 3px solid #ff69b4;
   border-radius: 32px;
   box-shadow: 0 0 40px 10px #ff69b4, 0 2px 12px #fff;
-  padding: 2.5rem 2rem 2rem 2rem;
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
   position: relative;
   overflow: hidden;
 }
@@ -125,10 +126,15 @@ body {
 #config-section .bratz-sparkle.one { top: 18px; left: 80%; }
 #config-section .bratz-sparkle.two { bottom: 24px; right: 70%; }
 
-#config-section h2 {
+#config-section h2, .question-card h2 {
   text-align: center;
   width: 100%;
   margin-bottom: 1.2em;
+  font-size: 1.3em;
+}
+
+h2 {
+  font-size: 1.2em;
 }
 
 label {
@@ -161,19 +167,55 @@ input:focus, select:focus {
   box-shadow: 0 0 6px #f8bbd0;
 }
 
-#scoreboard {
+#scoreboard, .scoreboard {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 2.5em;
+  gap: 0;
   background: rgba(255,255,255,0.85);
   border-radius: 18px;
   box-shadow: 0 0 10px #f8bbd0;
-  padding: 1.2em 2em;
-  margin: 2em auto;
-  max-width: 600px; /* Aumenta el ancho máximo si lo deseas más centrado */
+  padding: 0.7em 1.2em;
+  margin: 1.2em auto;
+  max-width: 340px;
   font-family: 'Quicksand', 'Open Sans', Arial, sans-serif;
   text-align: center;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  flex: 1 1 0;
+  margin: 0 0.5em;
+}
+
+.score-label {
+  color: #f06292;
+  font-size: 0.93em;
+  font-weight: 600;
+  margin-bottom: 0.1em;
+  letter-spacing: 1px;
+  text-align: center;
+  width: 100%;
+}
+
+.score-value {
+  color: #6d4c41;
+  font-size: 1.05em;
+  font-weight: bold;
+  background: #fce4ec;
+  border-radius: 8px;
+  padding: 0.15em 0.7em;
+  min-width: 2em;
+  text-align: center;
+  box-shadow: 0 1px 4px #f8bbd0;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
 }
 
 #questions {
@@ -226,46 +268,31 @@ h1, h2, h5 {
   letter-spacing: 1px;
 }
 
-.scoreboard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5em;
-  background: rgba(255,255,255,0.85);
-  border-radius: 18px;
-  box-shadow: 0 0 10px #f8bbd0;
-  padding: 1.2em 2em;
-  margin: 2em auto;
-  max-width: 600px; /* Aumenta el ancho máximo si lo deseas más centrado */
-  font-family: 'Quicksand', 'Open Sans', Arial, sans-serif;
-  text-align: center;           /* Centra el contenido dentro del scoreboard */
-}
-
 .score-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;      /* Centra verticalmente el contenido */
-  min-width: 110px;            /* Opcional: iguala el ancho de cada bloque */
+  justify-content: center;
+  min-width: 80px;
 }
 
 .score-label {
   color: #f06292;
-  font-size: 1em;
+  font-size: 0.93em;
   font-weight: 600;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.1em;
   letter-spacing: 1px;
   text-align: center;
 }
 
 .score-value {
   color: #6d4c41;
-  font-size: 1.3em;
+  font-size: 1.05em;
   font-weight: bold;
   background: #fce4ec;
   border-radius: 8px;
-  padding: 0.2em 0.8em;
-  min-width: 2.5em;
+  padding: 0.15em 0.7em;
+  min-width: 2em;
   text-align: center;
   box-shadow: 0 1px 4px #f8bbd0;
   margin: 0 auto;
@@ -293,17 +320,93 @@ h1, h2, h5 {
 }
 
 .question-card {
-  background: linear-gradient(135deg, #fffafd 60%, #f8bbd0 100%);
-  border: 2px solid #f8bbd0;
-  border-radius: 22px;
-  box-shadow: 0 4px 18px #f8bbd044, 0 1px 6px #fff;
-  padding: 2em 1.5em 1.5em 1.5em;
-  margin: 1.5em 0;
+  /* Centrado y proporción igual a config-section */
+  margin-left: auto;
+  margin-right: auto;
+  background: radial-gradient(circle at 60% 40%, #fff0fa 0%, #ff69b4 100%);
+  border: 3px solid #ff69b4;
+  border-radius: 32px;
+  box-shadow: 0 0 40px 10px #ff69b4, 0 2px 12px #fff;
+  padding: 2.5rem 2rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+  max-width: 420px;
   width: 100%;
-  max-width: 340px;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.question-card::before, .question-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.question-card::before {
+  top: 10%; left: 5%; width: 60px; height: 60px;
+  background: url('data:image/svg+xml;utf8,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><polygon points="30,5 35,25 55,25 38,35 43,55 30,42 17,55 22,35 5,25 25,25" fill="hotpink" opacity="0.4"/></svg>') no-repeat center/contain;
+  opacity: 0.7;
+}
+.question-card::after {
+  bottom: 10%; right: 5%; width: 50px; height: 50px;
+  background: url('data:image/svg+xml;utf8,<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="20" fill="hotpink" opacity="0.25"/><polygon points="25,10 28,22 40,22 30,28 33,40 25,33 17,40 20,28 10,22 22,22" fill="white" opacity="0.5"/></svg>') no-repeat center/contain;
+  opacity: 0.7;
+}
+
+.question-card > div,
+.question-card > strong,
+.question-card > br,
+.question-card > div + div {
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.question-card button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1em;
+  margin: 0.7em auto;
+  width: 90%;
+  max-width: 260px;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #f8bbd0;
+}
+
+.thanks-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  font-family: 'Quicksand', 'Luckiest Guy', cursive, Arial, sans-serif;
+  font-size: 2.2em;
+  color: #fff;
+  background: none;
+  text-shadow: 0 2px 12px #f8bbd0, 0 0 8px #ff69b4;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 2em auto;
+}
+
+.final-results-card {
+  background: radial-gradient(circle at 60% 40%, #fff0fa 0%, #ff69b4 100%);
+  border: 3px solid #ff69b4;
+  border-radius: 32px;
+  box-shadow: 0 0 40px 10px #ff69b4, 0 2px 12px #fff;
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: 2rem auto;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   z-index: 1;
 }
