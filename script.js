@@ -9,6 +9,9 @@ const questionsDiv = document.getElementById('questions');
 
 let score = 0;
 let total = 0;
+let playerName = '';
+let questionTimes = [];
+let questionStartTime = 0;
 
 startBtn.addEventListener('click', () => {
   introSection.classList.add('hidden');
@@ -20,11 +23,14 @@ async function loadCategories() {
   try {
     const res = await fetch('https://opentdb.com/api_category.php');
     const data = await res.json();
+    const allowedIds = [9, 11, 12, 15, 17];
     data.trivia_categories.forEach(c => {
-      const opt = document.createElement('option');
-      opt.value = c.id;
-      opt.textContent = c.name;
-      catSelect.appendChild(opt);
+      if (allowedIds.includes(c.id)) {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name;
+        catSelect.appendChild(opt);
+      }
     });
   } catch (e) {
     console.error('Error cargando categorías', e);
@@ -37,6 +43,8 @@ form.addEventListener('submit', async e => {
   questionsDiv.innerHTML = '';
   score = 0;
   total = 0;
+  playerName = document.getElementById('player-name').value;
+  questionTimes = [];
   config.classList.add('hidden');
   const amount = form['question-count'].value;
   const diff = form.difficulty.value;
@@ -87,33 +95,29 @@ function showQuestions(questions) {
 
   function showQuestion(idx) {
     questionsDiv.innerHTML = '';
+    questionStartTime = Date.now();
     const q = questions[idx];
     const answers = [...q.incorrect_answers, q.correct_answer].sort(() => Math.random() - 0.5);
     const qDiv = document.createElement('div');
-    qDiv.style.marginBottom = '20px';
-    qDiv.innerHTML = `<strong>Pregunta ${idx + 1}:</strong> ${decodeHtml(q.question)}<br>`;
+    qDiv.innerHTML = `
+      <div>
+        Pregunta ${idx + 1} de ${questions.length}
+      </div>
+      <strong>Pregunta ${idx + 1}:</strong> ${decodeHtml(q.question)}<br>
+    `;
 
     const timerDiv = document.createElement('div');
-    timerDiv.style.fontWeight = 'bold';
-    timerDiv.style.margin = '10px 0';
     timerDiv.textContent = `Tiempo restante: 20s`;
     qDiv.appendChild(timerDiv);
 
     timeLeft = 20;
-    timerDiv.style.color = '#222';
 
     timer = setInterval(() => {
       timeLeft--;
       timerDiv.textContent = `Tiempo restante: ${timeLeft}s`;
-      if (timeLeft <= 5) {
-        timerDiv.style.color = '#c0392b';
-        timerDiv.style.fontSize = '1.2em';
-      } else {
-        timerDiv.style.color = '#222';
-        timerDiv.style.fontSize = '1em';
-      }
       if (timeLeft === 0) {
         clearInterval(timer);
+        finishQuestion();
         Array.from(qDiv.querySelectorAll('button')).forEach(b => b.disabled = true);
         Array.from(qDiv.querySelectorAll('button')).forEach(b => {
           if (b.textContent === decodeHtml(q.correct_answer)) {
@@ -129,12 +133,11 @@ function showQuestions(questions) {
 
     answers.forEach(a => {
       const btn = document.createElement('button');
-      btn.style.margin = '4px';
       btn.textContent = decodeHtml(a);
       btn.onclick = function () {
         if (btn.disabled) return;
         clearInterval(timer);
-        Array.from(qDiv.querySelectorAll('button')).forEach(b => b.disabled = true);
+        finishQuestion();
         if (a === q.correct_answer) {
           btn.style.background = '#27ae60';
           btn.style.color = '#fff';
@@ -164,11 +167,51 @@ function showQuestions(questions) {
     if (current < questions.length) {
       showQuestion(current);
     } else {
-      questionsDiv.innerHTML += `<div style="font-size:1.3em;margin-top:20px;"><b>¡Terminaste!</b><br>Puntaje final: ${score}<br>Correctas: ${correct}<br>Incorrectas: ${incorrect}</div>`;
+      showFinalResults(questions, correct, incorrect, score, questionTimes);
     }
   }
 
   updateScoreboard();
   showQuestion(current);
+}
+
+function finishQuestion() {
+  const elapsed = (Date.now() - questionStartTime) / 1000;
+  questionTimes.push(elapsed);
+}
+
+function showFinalResults(questions, correct, incorrect, score, questionTimes) {
+  const totalQuestions = questions.length;
+  const percent = ((correct / totalQuestions) * 100).toFixed(1);
+  const avgTime = (questionTimes.reduce((a, b) => a + b, 0) / questionTimes.length).toFixed(2);
+
+  questionsDiv.innerHTML = `
+    <div style="font-size:1.3em;margin-top:20px;">
+      <b>Game Over!</b><br>
+      <b>Player:</b> ${playerName}<br>
+      <b>Score:</b> ${score}<br>
+      <b>Correct:</b> ${correct} / ${totalQuestions}<br>
+      <b>Accuracy:</b> ${percent}%<br>
+      <b>Average time per question:</b> ${avgTime} s<br><br>
+      <button id="play-again-btn">Play Again</button>
+      <button id="change-config-btn">Change Settings</button>
+      <button id="exit-btn">Exit</button>
+    </div>
+  `;
+  scoreboard.classList.add('hidden');
+
+  document.getElementById('play-again-btn').onclick = () => {
+    scoreboard.classList.remove('hidden');
+    showQuestions(questions);
+  };
+  document.getElementById('change-config-btn').onclick = () => {
+    questionsDiv.innerHTML = '';
+    config.classList.remove('hidden');
+    scoreboard.classList.add('hidden');
+  };
+  document.getElementById('exit-btn').onclick = () => {
+    questionsDiv.innerHTML = '<div style="font-size:1.5em; color: var(--dorado); margin-top:2em;">Thanks for playing!</div>';
+    scoreboard.classList.add('hidden');
+  };
 }
 });
