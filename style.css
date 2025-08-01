@@ -410,3 +410,87 @@ h1, h2, h5 {
   text-align: center;
   z-index: 1;
 }
+@media (max-width: 600px) {
+  body {
+    background: url('fondo-bratz.png') no-repeat center center fixed, var(--fondo);
+    background-size: auto 120%;
+    background-attachment: scroll;
+  }
+
+  #intro-section {
+    background: url('who-knows.png') no-repeat center center, var(--fondo);
+    background-size: contain;
+    background-position: center 30%;
+    padding-top: 60%;
+    justify-content: flex-start;
+  }
+
+  #config-section, 
+  .question-card,
+  .final-results-card {
+    background: radial-gradient(circle at 60% 40%, #fff0fa 0%, #ff69b4 100%) !important;
+    border: 3px solid #ff69b4 !important;
+    box-shadow: 0 0 20px 5px #ff69b4, 0 2px 8px #fff !important;
+    max-width: 92%;
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
+  }
+
+  #config-section::before, 
+  #config-section::after,
+  .question-card::before,
+  .question-card::after {
+    display: block !important;
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+  .intro-btn, 
+  button,
+  #questions button {
+    font-size: 1rem;
+    padding: 0.8em 1.2em;
+    margin: 0.5em auto;
+    width: 90%;
+    max-width: 280px;
+    background: linear-gradient(90deg, #f8bbd0 0%, #f06292 100%) !important;
+    box-shadow: 0 2px 8px #f8bbd0 !important;
+  }
+
+  .bratz-sparkle {
+    display: block !important;
+    opacity: 0.7;
+  }
+
+
+  .question-card > div,
+  .question-card strong,
+  .final-results-card {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+
+  #scoreboard {
+    flex-wrap: nowrap;
+    padding: 0.5em;
+    max-width: 95%;
+  }
+
+  .score-item {
+    min-width: auto;
+    padding: 0 0.3em;
+  }
+}
+
+@media (max-width: 400px) {
+  #intro-section {
+    background-size: 90%;
+    background-position: center 25%;
+  }
+
+  .question-card button, 
+  #questions button {
+    font-size: 0.95rem;
+    padding: 0.7em;
+  }
+}
